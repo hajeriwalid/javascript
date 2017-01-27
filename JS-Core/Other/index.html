@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Walid H  Playground</title>
+      <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<html>
+<head>
+<title>Javascript Walid H Playground</title>
+</head>
+<body>
+<form id="fibo_form" class="fiform" novalidate >
+  <h1>JS Playground</h1>
+  <div class="fi" >
+    <label>
+    <span>Enter your integer</span>
+    <input type="number" id="okokok" required min="0" />
+    </label>
+  </div>
+  <div class="fi" >
+    <label>
+    <input type="submit" value="Calculate" id="submit" />
+    </label>
+  </div>
+</form>
+  <div class="fi" >
+    <label id="myoutput"></label>
+    </span>
+  </div>
+    <div class="fi" >
+    <label id="myoutput2"></label>
+    </span>
+  </div>
+</body>
+</html>
+    <script src="js/index.js"></script>
+    <script type="text/javascript" charset="utf-8">
+          // Javascript inside this file
+
+
+          /*########### WORKING with STRINGs ############  */
+
+          /***** Quick prompt for input  ****/
+          name   = prompt("What's your name ?");
+
+          regex = /^a.*t$/;
+
+
+          /****** working with Strings *****/
+          var start = 'Hi '+  name;
+          
+          /***** strings are arrays of characters ****/
+          console.log(start + "! " + name + " has " + name[0] + " as its first letter");
+
+          /***** truncate a string ****/
+          console.log(name.substring(0, name.length - 5));
+
+          /***** find a string within another string *******/
+          if(name.includes("lord")) console.log("welcome my lord");
+
+          /****** string comparison, can be used with many options and localizations ********/ 
+          if( name.localeCompare("bbbbb") < 0 ) console.log("this name is before bbbbb");
+
+          /****** string comparison, can be used with many options and localizations ********/ 
+          //Use .test if you want a faster boolean check. Use .match to retrieve all matches when using the g global flag.
+          if( name.match(regex) ) console.log ("this name starts with an a and finishes with a t");
+
+      </script>
+</body>
+</html>
