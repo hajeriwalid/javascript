@@ -5,6 +5,123 @@ Based on ECMAScript 6
 ****/
 
 
+/***** Intro to Objects  ******/
+
+var firstObj = {
+
+  name: "jimmy",
+  "age": 22,
+  car: {
+    brand: "Dodge",
+    model: "Viper"
+  },
+  testmethod : function(a,b){
+    console.log("function property of an object");
+    console.log(this,a,b);
+  }
+};
+
+console.log(firstObj.name);
+console.log(firstObj.car.model);
+console.log(firstObj.somethingundefined || "we could not find this property");
+
+var myObj = new Object(),
+    str = 'myString',
+    rand = Math.random(),
+    obj = new Object();
+
+myObj.type              = 'whatever';
+myObj['date created']   = '14 jan';
+myObj[str]              = 'hello';
+//myObj[rand]             = 'Random Number';
+myObj[obj]              = 'Object';
+myObj['']               = 'Even an empty string';
+
+console.log(myObj);
+
+/************ This Keyword **************/
+var fn = function(a,b){
+  console.log(this,a,b); // this is bound to the Global object
+}
+
+fn(5,6);
+fn.call(3,7,8); // .call binds this keyword to 3
+firstObj.testmethod.call(2,1,9);
+
+/************ OO JS  - Static Stuff  *****************/ 
+
+
+// js eq of a public static method
+Animal.getType = function (){
+return "Object Animal";
+};
+
+// js eq of a public static variable 
+Animal.version = "1.0";
+
+console.log(Animal.getType() ); 
+console.log(Animal.version);
+
+
+
+
+/************ OO JS  - Prototypes to handle inheritance  *****************/ 
+
+
+function Animal(x,y) {
+  this.height='';
+  this.weight='';
+  this.posx=x;
+  this.posy=y;
+
+  this.move = function(){
+    this.posx++;
+    this.posy++;
+    console.log("Animal is walking");
+  }
+  console.log("Animal constructor...");
+}
+
+
+
+
+function Dog(){
+  Animal.call(5,10); // call the constructor of the parent
+
+ console.log("posx : " + this.posx);
+ console.log("posy : " + this.posy);
+
+  this.move = function(){
+    this.posx= posx+3;
+    this.posy=this.posy+3;
+    console.log("Dog is walking");
+  }
+}
+
+Dog.prototype = Object.create(Animal.prototype); //inheritance
+
+
+var mydog = new Dog;
+
+mydog instanceof Dog; //returns true
+
+mydog.move();
+console.log("posx : " + mydog.posx);
+console.log("posy : " + mydog.posy);
+
+//Overriding example
+function Player() {
+  this.isAvailable = function() {
+    return "Instance method says - he is hired";
+  };
+}
+Player.prototype.isAvailable = function() {  // we use use the this keyword to initialize properties in a constructor
+  return "Prototype method says - he is Not hired";
+};
+var crazyBob = new Player();
+console.log(crazyBob.isAvailable());
+
+
 
 /***** Using Array.reduce to sum all elements in an array without looping :  -- see below for arrow functions  ******/
 var total = [0, 1, 2, 3].reduce((accumulator, currentValue)=> accumulator + currentValue,0);
@@ -100,7 +217,7 @@ function addLinks () {
     link.onclick = function (num) {
       return function () {
         alert(num);
-      };
+      }; // function() { ... } syntax returns a function objec
     }(i);
     document.body.appendChild(link);
   }
@@ -152,34 +269,5 @@ fibo_form.onsubmit = function(e) {
   else{
    console.log("test 2, not  an integer");
  }
-
-/*
-      if (x<0) alert ("please enter a positive number");
-      else {
-
-        
-             //alert('Corresponding Fibonacci number : ' + fibo_walid(x));
-             var toDisplay= "Corresponding Fibonacci number : " + fibo_walid(x);
-
-             document.getElementById("myoutput").innerHTML =  toDisplay ;
-
-          
-          if (is_prime(x)) {
-            var toDisplay2 = x + ' is a prime number ';
-            //alert(toDisplay2);
-            document.getElementById("myoutput2").innerHTML =  toDisplay2 ;
-
-          } 
-
-          else {
-            var toDisplay3 = x + ' is NOT a prime number';
-            //alert(toDisplay3);
-            document.getElementById("myoutput2").innerHTML =  toDisplay3 ;
-
-          } 
-
-      }
-      */
-
       return false;
-    }
+}
